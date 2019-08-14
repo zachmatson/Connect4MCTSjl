@@ -1,5 +1,5 @@
-if !("D:/Users/Zachary/Julia Projects/Connect4Solver" in LOAD_PATH)
-    push!(LOAD_PATH, "D:/Users/Zachary/Julia Projects/Connect4Solver")
+if !(pwd() in LOAD_PATH)
+    push!(LOAD_PATH, pwd())
 end
 using Connect4Board
 using MCTSdistributed

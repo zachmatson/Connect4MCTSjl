@@ -6,8 +6,8 @@ if length(procs()) < Threads.nthreads()
     addprocs(Threads.nthreads()-length(procs()))
 end
 
-@everywhere if !("D:/Users/Zachary/Julia Projects/Connect4Solver" in LOAD_PATH)
-    push!(LOAD_PATH, "D:/Users/Zachary/Julia Projects/Connect4Solver")
+@everywhere if !(pwd() in LOAD_PATH)
+    push!(LOAD_PATH, pwd())
 end
 
 using Connect4Board
