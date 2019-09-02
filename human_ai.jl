@@ -1,4 +1,4 @@
-if !(pwd() in LOAD_PATH)
+if !(pwd() ∈ LOAD_PATH)
     push!(LOAD_PATH, pwd())
 end
 using Connect4Board
@@ -26,7 +26,7 @@ function human_vs_ai()
                 print("Please select a move (1-7): ")
                 move = parse(Int8, chomp(readline(stdin)))
 
-                if move in board.validmoves
+                if move ∈ board.validmoves
                     break
                 end
             end

@@ -6,7 +6,7 @@ if length(procs()) < Threads.nthreads()
     addprocs(Threads.nthreads()-length(procs()))
 end
 
-@everywhere if !(pwd() in LOAD_PATH)
+@everywhere if pwd() ∉ LOAD_PATH
     push!(LOAD_PATH, pwd())
 end
 
