@@ -1,4 +1,4 @@
-if !(pwd() ∈ LOAD_PATH)
+if pwd() ∉ LOAD_PATH
     push!(LOAD_PATH, pwd())
 end
 using Connect4Board
