@@ -4,7 +4,7 @@ end
 using Connect4Board
 using MCTSdistributed
 
-board = newboard()
+board = Board()
 MCTSpickmove(board)
 
 println("\n\n\n\n")

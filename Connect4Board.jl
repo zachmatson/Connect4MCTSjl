@@ -1,7 +1,7 @@
 module Connect4Board
 
 export Board
-export newboard, copyboard, playmove!, iswin!
+export playmove!
 export printboard
 
 mutable struct Board
@@ -14,19 +14,15 @@ mutable struct Board
     isfull::Bool
 end
 
-function newboard()::Board
-    return Board(0, 0, 2, [6,6,6,6,6,6,6], [1,2,3,4,5,6,7], false, false)
-end
+Board()::Board = Board(0, 0, 2, [6,6,6,6,6,6,6], [1,2,3,4,5,6,7], false, false)
 
-@inline function copyboard(oldboard::Board)::Board
-    return Board(oldboard.board,
-                 oldboard.lastplayerboard,
-                 oldboard.lastplayer,
-                 copy(oldboard.remainingmoves),
-                 copy(oldboard.validmoves),
-                 oldboard.iswin,
-                 oldboard.isfull)
-end
+Board(oldboard::Board)::Board = Board(oldboard.board,
+                               oldboard.lastplayerboard,
+                               oldboard.lastplayer,
+                               copy(oldboard.remainingmoves),
+                               copy(oldboard.validmoves),
+                               oldboard.iswin,
+                               oldboard.isfull)
 
 @inline function playmove!(board::Board, move::Int8)
     board.board |= board.board + 1 << 7(move - 1)
@@ -42,7 +38,7 @@ end
         end
     end
     iswin!(board)
-    board.isfull = board.board == 279258638311359
+    board.isfull = board.board == 279258638311359;
 end
 
 @inline function iswin!(board::Board)

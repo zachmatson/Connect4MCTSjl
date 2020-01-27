@@ -45,7 +45,7 @@ end
     node.children_n = zeros(Int32, nummoves)
     node.children_w = zeros(Float32, nummoves)
     for (i, move::Int8) in enumerate(node.state.validmoves)
-        tempboard::Board = copyboard(node.state)
+        tempboard::Board = Board(node.state)
         playmove!(tempboard, move)
         node.children[i] = TreeNode(tempboard, node, i, 0, false, [], [], [], [])
     end
@@ -110,7 +110,7 @@ end
 
 
 function rollout!(node::TreeNode)
-    tempboard::Board = copyboard(node.state)
+    tempboard::Board = Board(node.state)
     while true
         if tempboard.iswin
             backpropogate!(node, Float32(node.state.lastplayer == tempboard.lastplayer))

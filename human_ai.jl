@@ -7,7 +7,7 @@ using MCTSdistributed
 AI_SIM_COUNT = 150_000
 
 function human_vs_ai()
-    board = newboard()
+    board = Board()
     player = 2
 
     print("Do you want to play first or second? (1/2): ")
