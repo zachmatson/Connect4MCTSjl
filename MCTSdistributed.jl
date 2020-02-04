@@ -2,8 +2,8 @@ module MCTSdistributed
 
 using Distributed
 
-if length(procs()) < Threads.nthreads()
-    addprocs(Threads.nthreads()-length(procs()))
+if length(procs()) < Sys.CPU_THREADS
+    addprocs(Sys.CPU_THREADS - length(procs()))
 end
 
 @everywhere if pwd() ∉ LOAD_PATH
@@ -59,7 +59,7 @@ end
 
 
 @inline function backpropogate!(node::TreeNode, outcome::Float32)
-    while node.parent != nothing
+    while node.parent !== nothing
         node.n += 1
         node.parent.children_n[node.childID] += 1
         node.parent.children_w[node.childID] += outcome
@@ -71,8 +71,8 @@ end
 
 
 function MCTSpickmove(board::Board, runcount::Int64 = 20_000)
-    runs_per_thread::Int64 = Int64(ceil(runcount/Threads.nthreads()))
-    n_array::Array{Int32,1} = @distributed (+) for i = 1:Threads.nthreads()
+    runs_per_thread::Int64 = Int64(ceil(runcount / Sys.CPU_THREADS))
+    n_array::Array{Int32,1} = @distributed (+) for i = 1:Sys.CPU_THREADS
         let root::TreeNode = rootnode(board)
             nodeexpand!(root)
             for child in root.children
