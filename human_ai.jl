@@ -4,7 +4,7 @@ end
 using Connect4Board
 using MCTSdistributed
 
-AI_SIM_COUNT = 150_000
+AI_SIM_COUNT = 300_000
 
 function human_vs_ai()
     board = Board()
